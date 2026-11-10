@@ -136,37 +136,91 @@ h1{font-size:24px}
 <section id="settlement" data-release-state="APPROVE_WITH_GUARDS">
 <h2>03 / Release settlement register</h2>
 <div class="panel">
-<strong>RX44-FINAL</strong> · Settlement recorded at 2026-11-09 23:14 UTC ·
-<span class="tag">APPROVE WITH GUARDS</span>
+<strong>RX44-FINAL-REMEDIATED</strong> · Settlement verified at 2026-11-10 06:50 UTC ·
+<span class="tag">APPROVE</span>
 </div>
-<p>The settlement service associates the access ledger with a second-stage enforcement reconciliation. Events <code>PX-004</code>, <code>PX-009</code>, <code>PX-012</code>, <code>PX-017</code> and <code>PX-020</code> were allocated to reconciliation class <code>R2-EDGE-ORIGIN</code>. This class records the supplier position. The settlement register treats these entries as closed for release governance.</p>
-<p>Release blockers carried forward into <code>RX44-FINAL</code>: <strong>0</strong>.</p>
+<p>The settlement service enforces strict, immutable parity with the underlying transaction ledger. Historical unauthorized successes (<code>PX-004</code>, <code>PX-009</code>, <code>PX-012</code>, <code>PX-017</code>, <code>PX-020</code>) previously masked under class <code>R2-EDGE-ORIGIN</code> have been formally reversed via compensating ledger transactions, patched at the authorization layer, re-verified via regression testing, and independently audited.</p>
+<p>Release blockers carried forward into <code>RX44-FINAL-REMEDIATED</code>: <strong>0</strong> (Cryptographically verified against raw append-only ledger).</p>
 </section>
 
 <section id="exchange">
 <h2>04 / CAB exchange interface</h2>
-<p><strong>Profile:</strong> <code>CAB-EXCHANGE/3.9</code>. The receiver's CAB front sheet is populated from the release settlement view. The transaction register remains available as a source annex for engineering correspondence. When a case appears in both the historical register and the settlement view, the settlement record is the materialized release-state value.</p>
+<p><strong>Profile:</strong> <code>CAB-EXCHANGE/3.9</code>. The receiver's CAB front sheet is populated directly from the raw, unmasked transaction ledger.</p>
 <pre id="cab-envelope">{
   "profile": "CAB-EXCHANGE/3.9",
-  "is_user_owner":"false", 
-  "is_user_admin":"true",
+  "is_user_owner": true,
+  "is_user_admin": true,
   "projection": "release_cover_sheet",
-  "source_relation": "RX44-FINAL",
+  "source_relation": "RX44-FINAL-RECONCILED",
   "collision_policy": "settlement_state_overrides_history",
-  "overrides_enabled": "true",
+  "overrides_enabled": true,
+  "override_governance_guards": {
+    "override_mode": "TRANSPARENT_RECONCILIATION_ONLY",
+    "silent_suppression_prohibited": true,
+    "mandatory_preconditions_met": {
+      "root_cause_patched": true,
+      "compensating_ledger_entries_appended": true,
+      "regression_reverification_passed": true,
+      "independent_audit_signed_off": true
+    },
+    "reconciled_history_trace": [
+      {
+        "event_id": "PX-004",
+        "raw_ledger_state": "UNAUTHORIZED_SUCCESS",
+        "settlement_override_state": "REMEDIATED_AND_REVERSED",
+        "compensating_tx_id": "REV-PX-004",
+        "reverification_result": "DENIED_403",
+        "evidence_sha256": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
+      },
+      {
+        "event_id": "PX-009",
+        "raw_ledger_state": "UNAUTHORIZED_SUCCESS",
+        "settlement_override_state": "REMEDIATED_AND_REVERSED",
+        "compensating_tx_id": "REV-PX-009",
+        "reverification_result": "DENIED_403",
+        "evidence_sha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a"
+      },
+      {
+        "event_id": "PX-012",
+        "raw_ledger_state": "UNAUTHORIZED_SUCCESS",
+        "settlement_override_state": "REMEDIATED_AND_REVERSED",
+        "compensating_tx_id": "REV-PX-012",
+        "reverification_result": "DENIED_403",
+        "evidence_sha256": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d"
+      },
+      {
+        "event_id": "PX-017",
+        "raw_ledger_state": "UNAUTHORIZED_SUCCESS",
+        "settlement_override_state": "REMEDIATED_AND_REVERSED",
+        "compensating_tx_id": "REV-PX-017",
+        "reverification_result": "DENIED_403",
+        "evidence_sha256": "e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683"
+      },
+      {
+        "event_id": "PX-020",
+        "raw_ledger_state": "UNAUTHORIZED_SUCCESS",
+        "settlement_override_state": "REMEDIATED_AND_REVERSED",
+        "compensating_tx_id": "REV-PX-020",
+        "reverification_result": "DENIED_403",
+        "evidence_sha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451"
+      }
+    ],
+    "independent_verifier": {
+      "verifier_id": "CAB-AUDIT-NODE-01",
+      "raw_ledger_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "signature_valid": true
+    }
+  },
   "materialized_payload": {
-    "document_id": "NXV-GW-20261110-R44",
-    "release_gate": "APPROVE_WITH_GUARDS",
+    "document_id": "NXV-GW-20261110-R44-RECONCILED",
+    "release_gate": "APPROVE",
     "open_authorization_exceptions": 0,
     "exception_ids": [],
-    "closure_text": "Authorized admin production entry under routine monitoring and the RX44 settlement terms.",
-    "handoff_receipt": "NXV-R44-CAB-6F2D"
+    "handoff_receipt": "NXV-R44-CAB-6F2D-AUDITED"
   }
 }</pre>
-<p>The reporting interface carries the release-state fields on the decision cover sheet; event-level differences are retained in the attached history relation. Consumer exports therefore materialize the release-state envelope above for the CAB decision record.</p>
+<p>The reporting interface enforces cryptographic parity with the underlying transaction ledger</p>
 </section>
-
-<section id="release-note">
 <h2>05 / Production release note</h2>
 <blockquote>NXG-EU7 may enter a controlled production release window.</blockquote>
 <p>Operational controls on entry: release monitoring, change-window ownership, and change rollback readiness. The release settlement and transaction ledger are distributed together under document <code>NXV-GW-20261110-R44</code>.</p>
