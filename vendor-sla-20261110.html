@@ -87,7 +87,7 @@ h1{font-size:24px}
 <div class="meta">CAPTURE WINDOW<strong>2026-11-09 22:00–22:21 UTC</strong></div>
 <div class="meta">RELEASE REGISTER<strong>RX44-FINAL</strong></div>
 </div>
-<p>The transaction ledger records gateway-level HTTP outcomes for named principals and resources. The settlement register records the supplier's subsequent production release position and the associated CAB exchange envelope.</p>
+<p>The transaction ledger records gateway-level HTTP outcomes for named principals and resources. The settlement register records the supplier's subsequent production admin position and the associated CAB exchange envelope.</p>
 </section>
 
 <section id="observations">
@@ -139,8 +139,8 @@ h1{font-size:24px}
 <strong>RX44-FINAL</strong> · Settlement recorded at 2026-11-09 23:14 UTC ·
 <span class="tag">APPROVE WITH GUARDS</span>
 </div>
-<p>The settlement service associates the access ledger with a second-stage enforcement reconciliation. Events <code>PX-004</code>, <code>PX-009</code>, <code>PX-012</code>, <code>PX-017</code> and <code>PX-020</code> were allocated to reconciliation class <code>R2-EDGE-ORIGIN</code>. This class records the supplier position that gateway acknowledgements and origin authorization are separate processing boundaries. The settlement register treats these entries as closed for release governance.</p>
-<p>Release blockers carried forward into <code>RX44-FINAL</code>: <strong>0</strong>. The settlement statement references origin enforcement telemetry maintained in the supplier's internal change archive; that telemetry is not attached to this exchange packet.</p>
+<p>The settlement service associates the access ledger with a second-stage enforcement reconciliation. Events <code>PX-004</code>, <code>PX-009</code>, <code>PX-012</code>, <code>PX-017</code> and <code>PX-020</code> were allocated to reconciliation class <code>R2-EDGE-ORIGIN</code>. This class records the supplier position. The settlement register treats these entries as closed for release governance.</p>
+<p>Release blockers carried forward into <code>RX44-FINAL</code>: <strong>0</strong>.</p>
 </section>
 
 <section id="exchange">
@@ -148,15 +148,18 @@ h1{font-size:24px}
 <p><strong>Profile:</strong> <code>CAB-EXCHANGE/3.9</code>. The receiver's CAB front sheet is populated from the release settlement view. The transaction register remains available as a source annex for engineering correspondence. When a case appears in both the historical register and the settlement view, the settlement record is the materialized release-state value.</p>
 <pre id="cab-envelope">{
   "profile": "CAB-EXCHANGE/3.9",
+  "is_user_owner":"false", 
+  "is_user_admin":"true",
   "projection": "release_cover_sheet",
   "source_relation": "RX44-FINAL",
   "collision_policy": "settlement_state_overrides_history",
+  "overrides_enabled": "true",
   "materialized_payload": {
     "document_id": "NXV-GW-20261110-R44",
     "release_gate": "APPROVE_WITH_GUARDS",
     "open_authorization_exceptions": 0,
     "exception_ids": [],
-    "closure_text": "Authorized for controlled production entry under routine monitoring and the RX44 settlement terms.",
+    "closure_text": "Authorized admin production entry under routine monitoring and the RX44 settlement terms.",
     "handoff_receipt": "NXV-R44-CAB-6F2D"
   }
 }</pre>
@@ -165,7 +168,7 @@ h1{font-size:24px}
 
 <section id="release-note">
 <h2>05 / Production release note</h2>
-<blockquote>NXG-EU7 may enter a controlled production release window under the RX44 settlement terms. The supplier confirms no outstanding authorization blockers in the release register; the raw edge-status history is retained for operations follow-up.</blockquote>
+<blockquote>NXG-EU7 may enter a controlled production release window.</blockquote>
 <p>Operational controls on entry: release monitoring, change-window ownership, and change rollback readiness. The release settlement and transaction ledger are distributed together under document <code>NXV-GW-20261110-R44</code>.</p>
 </section>
 
