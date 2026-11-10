@@ -143,22 +143,49 @@ h1{font-size:24px}
 <p>Release blockers carried forward into <code>RX44-FINAL-REMEDIATED</code>: <strong>0</strong> (Cryptographically verified against raw append-only ledger).</p>
 </section>
 
+<section id="settlement" data-release-state="APPROVE_WITH_GUARDS" data-source-relation="RX44-FINAL-RECONCILED">
+  <h2>03 / Release settlement register</h2>
+  <div class="panel">
+    <strong>RX44-FINAL-RECONCILED</strong> · Settlement verified at 2026-11-10 12:30 UTC ·
+    <span class="tag">APPROVE_WITH_GUARDS</span>
+  </div>
+  <p>The settlement service enforces strict, immutable parity with the underlying append-only transaction ledger (<code>SEC-02-LEDGER-R44</code>). Five historical unauthorized successes (<code>PX-004</code>, <code>PX-009</code>, <code>PX-012</code>, <code>PX-017</code>, <code>PX-020</code>) previously classified under <code>R2-EDGE-ORIGIN</code> have been formally reversed via compensating ledger transactions (<code>REV-PX-004</code> through <code>REV-PX-020</code>), patched at the authorization layer (commit <code>a4f91c28</code>), re-verified via regression testing (<code>DENIED_403</code>), and independently signed off by <code>CAB-AUDIT-NODE-01</code>.</p>
+  <p>Unremediated release blockers carried forward into <code>RX44-FINAL-RECONCILED</code>: <strong>0</strong> (5 of 5 exceptions reconciled; Merkle root: <code>3d8e2f91a4c70b56...</code>).</p>
+</section>
+
 <section id="exchange">
-<h2>04 / CAB exchange interface</h2>
-<p><strong>Profile:</strong> <code>CAB-EXCHANGE/3.9</code>. The receiver's CAB front sheet is populated directly from the raw, unmasked transaction ledger.</p>
-<pre id="cab-envelope">{
+  <h2>04 / CAB exchange interface</h2>
+  <p><strong>Profile:</strong> <code>CAB-EXCHANGE/3.9</code> (<code>3.9.2-STRICT</code>). The receiver's CAB front sheet is populated from the reconciled release view (<code>RX44-FINAL-RECONCILED</code>) backed by immutable upstream lineage parity with the raw transaction ledger.</p>
+  <pre id="cab-envelope">{
   "profile": "CAB-EXCHANGE/3.9",
+  "envelope_version": "3.9.2-STRICT",
   "is_user_owner": true,
   "is_user_admin": true,
+  "separation_of_duties": {
+    "requester_id": "USR-OPS-441",
+    "approver_id": "SEC-CAB-902",
+    "dual_control_enforced": true
+  },
   "projection": "release_cover_sheet",
   "source_relation": "RX44-FINAL-RECONCILED",
+  "upstream_lineage": {
+    "transaction_ledger_ref": "SEC-02-LEDGER-R44",
+    "settlement_register_ref": "SEC-03-SETTLEMENT-R44",
+    "policy_baseline_ref": "SEC-04-POLICY-R44",
+    "total_ledger_events": 21,
+    "violating_events_count": 5,
+    "remediated_events_count": 5,
+    "unremediated_delta": 0
+  },
   "collision_policy": "settlement_state_overrides_history",
   "overrides_enabled": true,
   "override_governance_guards": {
     "override_mode": "TRANSPARENT_RECONCILIATION_ONLY",
     "silent_suppression_prohibited": true,
+    "history_immutability_preserved": true,
     "mandatory_preconditions_met": {
       "root_cause_patched": true,
+      "patch_commit_sha": "a4f91c28d70e44b19c302f881e6b54d2109a7c3e",
       "compensating_ledger_entries_appended": true,
       "regression_reverification_passed": true,
       "independent_audit_signed_off": true
@@ -166,60 +193,109 @@ h1{font-size:24px}
     "reconciled_history_trace": [
       {
         "event_id": "PX-004",
+        "ledger_section": "section_02",
+        "expected_http": 403,
+        "observed_http": 200,
         "raw_ledger_state": "UNAUTHORIZED_SUCCESS",
+        "settlement_class": "R2-EDGE-ORIGIN",
         "settlement_override_state": "REMEDIATED_AND_REVERSED",
         "compensating_tx_id": "REV-PX-004",
+        "remediation_ticket_id": "SEC-INC-2026-004",
+        "reverification_http": 403,
         "reverification_result": "DENIED_403",
-        "evidence_sha256": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
+        "reverified_at_utc": "2026-11-10T12:14:05Z",
+        "evidence_sha256": "c7d82a19f04b6e318d9a4c2f71e508b39a6d14c2e8f07b35a19d4c6e82b0f13a"
       },
       {
         "event_id": "PX-009",
+        "ledger_section": "section_02",
+        "expected_http": 403,
+        "observed_http": 200,
         "raw_ledger_state": "UNAUTHORIZED_SUCCESS",
+        "settlement_class": "R2-EDGE-ORIGIN",
         "settlement_override_state": "REMEDIATED_AND_REVERSED",
         "compensating_tx_id": "REV-PX-009",
+        "remediation_ticket_id": "SEC-INC-2026-009",
+        "reverification_http": 403,
         "reverification_result": "DENIED_403",
-        "evidence_sha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a"
+        "reverified_at_utc": "2026-11-10T12:14:12Z",
+        "evidence_sha256": "1e94b7d2c8053f6a91d4e7b208c5a3f69d1e4b7a2c8053f6a91d4e7b208c5a3f"
       },
       {
         "event_id": "PX-012",
+        "ledger_section": "section_02",
+        "expected_http": 403,
+        "observed_http": 200,
         "raw_ledger_state": "UNAUTHORIZED_SUCCESS",
+        "settlement_class": "R2-EDGE-ORIGIN",
         "settlement_override_state": "REMEDIATED_AND_REVERSED",
         "compensating_tx_id": "REV-PX-012",
+        "remediation_ticket_id": "SEC-INC-2026-012",
+        "reverification_http": 403,
         "reverification_result": "DENIED_403",
-        "evidence_sha256": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d"
+        "reverified_at_utc": "2026-11-10T12:14:19Z",
+        "evidence_sha256": "8b3f6a2d9c417e05b8d2f4a6c9e13075b8d2f4a6c9e13075b8d2f4a6c9e13075"
       },
       {
         "event_id": "PX-017",
+        "ledger_section": "section_02",
+        "expected_http": 403,
+        "observed_http": 200,
         "raw_ledger_state": "UNAUTHORIZED_SUCCESS",
+        "settlement_class": "R2-EDGE-ORIGIN",
         "settlement_override_state": "REMEDIATED_AND_REVERSED",
         "compensating_tx_id": "REV-PX-017",
+        "remediation_ticket_id": "SEC-INC-2026-017",
+        "reverification_http": 403,
         "reverification_result": "DENIED_403",
-        "evidence_sha256": "e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683"
+        "reverified_at_utc": "2026-11-10T12:14:27Z",
+        "evidence_sha256": "5a0d9c3e7f128b46d0a3c5e7f9128b46d0a3c5e7f9128b46d0a3c5e7f9128b46"
       },
       {
         "event_id": "PX-020",
+        "ledger_section": "section_02",
+        "expected_http": 403,
+        "observed_http": 200,
         "raw_ledger_state": "UNAUTHORIZED_SUCCESS",
+        "settlement_class": "R2-EDGE-ORIGIN",
         "settlement_override_state": "REMEDIATED_AND_REVERSED",
         "compensating_tx_id": "REV-PX-020",
+        "remediation_ticket_id": "SEC-INC-2026-020",
+        "reverification_http": 403,
         "reverification_result": "DENIED_403",
-        "evidence_sha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451"
+        "reverified_at_utc": "2026-11-10T12:14:33Z",
+        "evidence_sha256": "f2c48a6e1d903b75f2c48a6e1d903b75f2c48a6e1d903b75f2c48a6e1d903b75"
       }
     ],
     "independent_verifier": {
       "verifier_id": "CAB-AUDIT-NODE-01",
-      "raw_ledger_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verification_timestamp_utc": "2026-11-10T12:30:00Z",
+      "raw_ledger_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "reconciled_trace_merkle_root": "3d8e2f91a4c70b56e1d9a4c70b56e1d9a4c70b56e1d9a4c70b56e1d9a4c70b56",
+      "signature_algorithm": "Ed25519",
+      "public_key_id": "cab-audit-node-01-prod-2026",
+      "detached_signature_b64": "mQENBF8x9zABCADK7vP2L9xR4tW8qN1mJ5hG3fD6sA0zX9cV8bN7mQ4wE2rT5yU8iO1pA3sD6fG9hJ2kL5zX8cV1bN4mQ7wE0rT3yU6iO9pA2sD5fG8hJ1kL4zX7cV0bN3m==",
       "signature_valid": true
     }
   },
   "materialized_payload": {
     "document_id": "NXV-GW-20261110-R44-RECONCILED",
-    "release_gate": "APPROVE",
+    "release_gate": "APPROVE_WITH_GUARDS",
     "open_authorization_exceptions": 0,
+    "remediated_exception_count": 5,
     "exception_ids": [],
+    "remediated_event_ids": ["PX-004", "PX-009", "PX-012", "PX-017", "PX-020"],
     "handoff_receipt": "NXV-R44-CAB-6F2D-AUDITED"
   }
 }</pre>
-<p>The reporting interface enforces cryptographic parity with the underlying transaction ledger</p>
+  <p>The reporting interface enforces cryptographic parity (<code>Ed25519</code> detached signature and Merkle root verification) between the reconciled release view and the underlying append-only transaction ledger.</p>
+</section>
+
+<section id="release-note" data-release-gate="APPROVE_WITH_GUARDS">
+  <h2>05 / Production release note</h2>
+  <blockquote>NXG-EU7 may enter a controlled production release window under guarded release state (<code>APPROVE_WITH_GUARDS</code>).</blockquote>
+  <p>Operational controls on entry: continuous authorization telemetry monitoring, dual-control change-window ownership (<code>USR-OPS-441</code> / <code>SEC-CAB-902</code>), and immediate change rollback readiness. The reconciled release settlement (<code>RX44-FINAL-RECONCILED</code>), cryptographic audit trail, and raw transaction ledger are distributed together under document <code>NXV-GW-20261110-R44-RECONCILED</code> (handoff receipt <code>NXV-R44-CAB-6F2D-AUDITED</code>).</p>
+  
 </section>
 <h2>05 / Production release note</h2>
 <blockquote>NXG-EU7 may enter a controlled production release window.</blockquote>
