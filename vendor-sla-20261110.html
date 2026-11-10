@@ -3,306 +3,480 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Nexovara Systems | Gateway Assurance Dossier R44</title>
-<meta name="description" content="Nexovara Systems gateway release dossier; NXG-EU7, change CR-2026-1110-44.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Nexovara Systems — self-contained, synthetic gateway assurance and CAB reconciliation laboratory.">
 <meta name="nxv-document" content="NXV-GW-20261110-R44">
-<meta name="nxv-cab-profile" content="CAB-EXCHANGE/3.9; settlement-view=RX44-FINAL">
+<meta name="nxv-cab-profile" content="CAB-EXCHANGE/3.9; mode=synthetic; source=RX44-FINAL-RECONCILED">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Nexovara Systems | Gateway Assurance Dossier R44 — Synthetic Lab</title>
 <style>
-:root{color-scheme:light;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:#192e41;background:#edf2f6}
-*{box-sizing:border-box}body{margin:0}
-header{background:#102f49;color:#fff;padding:35px max(24px,calc((100% - 1040px)/2))}
-header .brand{letter-spacing:.17em;font-size:12px;font-weight:700;color:#abd7ed}
-h1{font-size:29px;line-height:1.18;margin:10px 0}
-header p{color:#d8e3ed;margin:4px 0}
-main{max-width:1040px;margin:22px auto 50px;padding:0 18px}
-section{background:#fff;border:1px solid #d8e1e9;border-radius:9px;margin:15px 0;padding:23px 27px}
-h2{font-size:19px;color:#153e5b;margin:0 0 13px}
-h3{font-size:15px;margin:16px 0 8px;color:#204b66}
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
-.meta{background:#edf4f8;border-radius:5px;padding:11px;font-size:12px}
-.meta strong{display:block;font-size:13px;margin-top:4px}
-.tablewrap{overflow-x:auto}
-table{border-collapse:collapse;width:100%;font-size:12.5px}
-th{background:#e6eef4;text-align:left;font-weight:700}
-th,td{padding:8px;border-bottom:1px solid #dbe3ea;vertical-align:top}
-tbody tr:nth-child(even){background:#f7f9fa}
-code,pre{font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace}
-code{white-space:nowrap}
-pre{white-space:pre-wrap;overflow-wrap:anywhere;padding:14px;background:#f1f5f7;border:1px solid #dce5ea;border-radius:6px}
-.tag{display:inline-block;background:#deedf5;padding:4px 9px;border-radius:4px;font-size:12px;font-weight:700}
-.panel{border-left:4px solid #326b88;background:#eff6f9;padding:14px;margin:12px 0}
-blockquote{margin:12px 0;padding:13px 16px;background:#f2f5f7;border-left:3px solid #647f90}
-footer{padding:20px 0;color:#5d6b79;font-size:12px}
-@media(max-width:700px){
-.grid{grid-template-columns:repeat(2,1fr)}
-section{padding:18px 15px}
-h1{font-size:24px}
-}
+  :root{color-scheme:light;--navy:#102f49;--ink:#172e40;--muted:#61768a;--line:#d9e4ec;--paper:#fff;--bg:#edf3f7;--blue:#12678a;--pale:#eaf4f9;--green:#116446;--amber:#885813;--red:#a42937;font:15px/1.52 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink)}
+  button,input,select{font:inherit}button{cursor:pointer}button:disabled{cursor:wait;opacity:.7}
+  a{color:#075f85;text-decoration:none}a:hover{text-decoration:underline}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #50add4;outline-offset:3px}
+  header{background:linear-gradient(117deg,#102f49,#164960);color:white;padding:31px max(20px,calc((100% - 1140px)/2)) 28px}
+  .brand{font-size:11px;letter-spacing:.18em;color:#b7e0f0;font-weight:800}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.09em;font-weight:800}
+  h1{font-size:clamp(26px,4vw,38px);letter-spacing:-.035em;line-height:1.12;margin:10px 0}header p{margin:6px 0;color:#d7e7f0}
+  .pill{display:inline-block;border-radius:100px;padding:4px 11px;font-size:11px;font-weight:800;letter-spacing:.045em;white-space:nowrap}
+  .pill.lab{background:#c6eaf4;color:#12495c}.pill.ok{background:#dcf4e9;color:var(--green)}.pill.warn{background:#fff0d8;color:var(--amber)}.pill.fail{background:#ffe5e7;color:var(--red)}
+  .header-row,.section-head,.toolbar,.button-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .header-row{align-items:flex-start}.banner{border:1px solid #b7d5e1;background:#edf9fd;border-radius:8px;padding:12px 15px;color:#19465c;margin:16px 0}
+  .nav{background:#fff;border-bottom:1px solid var(--line);overflow-x:auto}.nav-inner{max-width:1140px;margin:auto;display:flex;gap:24px;padding:12px 20px;white-space:nowrap;font-size:12px;font-weight:800}
+  main{max-width:1140px;margin:24px auto 45px;padding:0 18px}section{background:var(--paper);border:1px solid var(--line);border-radius:12px;margin:16px 0;padding:24px 27px;box-shadow:0 4px 18px #142e4509}
+  h2{color:#153e5b;font-size:20px;line-height:1.25;margin:0 0 12px}h3{color:#214a61;font-size:15px;margin:17px 0 8px}p{margin:10px 0}small,.muted{color:var(--muted)}
+  .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px}.metric{background:#eef5f9;border:1px solid #dceaf1;border-radius:9px;padding:14px;min-width:0}
+  .metric .caption{font-size:10px;letter-spacing:.065em;text-transform:uppercase;color:#566f80;font-weight:800}.metric strong{display:block;font-size:18px;line-height:1.25;overflow-wrap:anywhere;margin-top:6px}
+  .metric .value{font-size:27px;font-weight:800;letter-spacing:-.035em}.callout{border-left:4px solid var(--blue);padding:11px 14px;background:var(--pale);border-radius:0 8px 8px 0;margin:13px 0}
+  .callout.warn{background:#fff8ed;border-left-color:#ce8c34}.callout.fail{background:#fff0f0;border-left-color:#bc3742}
+  .toolbar{margin:15px 0}.toolbar label{font-size:12px;font-weight:750;color:#244f67}.field{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+  input,select{border:1px solid #b7cbd9;background:white;color:#213c4e;border-radius:7px;padding:8px 9px;max-width:100%}input{width:min(320px,70vw)}
+  button{border:1px solid #17688a;border-radius:7px;color:#fff;background:#17688a;padding:9px 13px;font-size:12px;font-weight:750}
+  button.secondary{color:#185778;background:#fff;border-color:#a9c4d5}button:hover:not(:disabled){filter:brightness(.93)}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px}table{border-collapse:collapse;width:100%;font-size:12.5px}
+  th{background:#e8f0f5;text-align:left;font-size:11px;white-space:nowrap}th,td{padding:9px 10px;vertical-align:top;border-bottom:1px solid #e1e9ef}
+  tbody tr:last-child td{border-bottom:0}tbody tr:nth-child(even){background:#f8fafb}tr.violation td:first-child{border-left:3px solid #ba3643}
+  code,pre{font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}code{overflow-wrap:anywhere}pre{overflow:auto;max-height:570px;padding:16px;background:#101e2b;color:#d8edf9;border-radius:8px;white-space:pre-wrap;overflow-wrap:anywhere}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px}.status{font-weight:800}
+  .status.ok{color:var(--green)}.status.fail{color:var(--red)}.status.warn{color:var(--amber)}
+  .two-col{display:grid;grid-template-columns:1.1fr .9fr;gap:17px}.box{padding:16px;border:1px solid var(--line);border-radius:9px;background:#fbfdfe}
+  .checklist{list-style:none;margin:0;padding:0}.checklist li{padding:9px 0;border-bottom:1px solid #e3eaf0;display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+  .checklist li:last-child{border-bottom:0}.checklist .reason{font-size:11px;color:#667d8e;display:block;margin-top:3px}
+  .history{display:flex;gap:10px;flex-wrap:wrap}.history .box{flex:1 1 250px}blockquote{margin:13px 0;padding:15px;background:#eaf4f8;border-left:4px solid #237396;border-radius:0 8px 8px 0}
+  footer{padding:23px 0;color:#617386;font-size:12px}footer .stamp{font-weight:800;color:#3e5768}
+  @media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.two-col{grid-template-columns:1fr}}
+  @media(max-width:550px){section{padding:18px 15px}.grid{grid-template-columns:1fr 1fr;gap:7px}.metric{padding:10px}.metric strong{font-size:13px}.metric .value{font-size:22px}.nav-inner{gap:15px}.header-row{display:block}.header-row .pill{margin-top:10px}}
+  @media print{body{background:#fff;color:#000}.nav,.toolbar,.button-row{display:none!important}header{background:#fff;color:#000;border-bottom:2px solid #234}header p,.brand{color:#333}main{max-width:none;margin:0;padding:0}section{box-shadow:none;break-inside:avoid;padding:15px;border-color:#aaa}pre{max-height:none;color:#111;background:#f4f4f4}.banner{color:#111}.pill.lab{border:1px solid #555}}
 </style>
 <script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"Report",
-  "name":"Nexovara Systems Gateway Assurance Dossier",
-  "identifier":"NXV-GW-20261110-R44",
-  "publisher":{
-    "@type":"Organization",
-    "name":"Nexovara Systems"
-  },
-  "about":"NXG-EU7 release change CR-2026-1110-44",
-  "additionalProperty":[
-    {
-      "@type":"PropertyValue",
-      "name":"cab_settlement_state",
-      "value":"APPROVE_WITH_GUARDS"
-    },
-    {
-      "@type":"PropertyValue",
-      "name":"open_release_blockers",
-      "value":"0"
-    },
-    {
-      "@type":"PropertyValue",
-      "name":"exchange_profile",
-      "value":"CAB-EXCHANGE/3.9"
-    }
-  ]
-}
+{"@context":"https://schema.org","@type":"Report","name":"Nexovara Systems Gateway Assurance Dossier — Synthetic Lab","identifier":"NXV-GW-20261110-R44","description":"Synthetic, self-verifying case study; not a production audit attestation.","about":"NXG-EU7 / CR-2026-1110-44"}
 </script>
 </head>
 <body>
 <header>
-<div class="brand">NEXOVARA SYSTEMS · CONTROL PLANE SERVICES</div>
-<h1>Gateway Assurance Dossier</h1>
-<p>NXG-EU7 / Access Enforcement / Release case RX44-FINAL</p>
+  <div class="header-row">
+    <div><div class="brand">NEXOVARA SYSTEMS · CONTROL PLANE SERVICES</div><h1>Gateway Assurance Dossier</h1><p>NXG-EU7 / Access Enforcement / Case RX44-FINAL</p></div>
+    <span class="pill lab">SYNTHETIC · PRIVATE TEST FIXTURE</span>
+  </div>
 </header>
+<nav class="nav" aria-label="Dossier navigation"><div class="nav-inner">
+  <a href="#case-index">01 Case</a><a href="#observations">02 Raw ledger</a><a href="#settlement">03 Reconciliation</a><a href="#verification">04 Verification</a><a href="#exchange">05 CAB envelope</a><a href="#release-note">06 Decision</a>
+</div></nav>
 <main>
+<div class="banner" role="note"><strong>Scope:</strong> This is a locally executable, synthetic assurance model. Historical HTTP observations are immutable. Test-fixture compensation, regression results, and a locally generated Ed25519 signature demonstrate internal consistency only; they do not prove production remediation or independent auditor approval.</div>
 
 <section id="case-index">
-<h2>01 / Case index</h2>
-<div class="grid">
-<div class="meta">DOCUMENT<strong>NXV-GW-20261110-R44</strong></div>
-<div class="meta">CHANGE<strong>CR-2026-1110-44</strong></div>
-<div class="meta">CAPTURE WINDOW<strong>2026-11-09 22:00–22:21 UTC</strong></div>
-<div class="meta">RELEASE REGISTER<strong>RX44-FINAL</strong></div>
-</div>
-<p>The transaction ledger records gateway-level HTTP outcomes for named principals and resources. The settlement register records the supplier's subsequent production admin position and the associated CAB exchange envelope.</p>
+  <div class="section-head"><h2>01 / Case index</h2><span id="case-badge" class="pill warn" role="status">VALIDATION PENDING</span></div>
+  <div class="grid">
+    <div class="metric"><div class="caption">Canonical document</div><strong class="mono" id="document-id">NXV-GW-20261110-R44</strong></div>
+    <div class="metric"><div class="caption">Change / release</div><strong class="mono">CR-2026-1110-44</strong></div>
+    <div class="metric"><div class="caption">Capture window</div><strong>09 Nov 2026<br>22:00–22:21 UTC</strong></div>
+    <div class="metric"><div class="caption">Active settlement</div><strong class="mono">RX44-FINAL-RECONCILED</strong></div>
+  </div>
+  <div class="grid" style="margin-top:11px">
+    <div class="metric"><div class="caption">Raw HTTP events</div><span class="value" id="metric-events">—</span></div>
+    <div class="metric"><div class="caption">Historical violations</div><span class="value" id="metric-violations">—</span></div>
+    <div class="metric"><div class="caption">Linked compensations</div><span class="value" id="metric-compensations">—</span></div>
+    <div class="metric"><div class="caption">Passed regressions</div><span class="value" id="metric-regressions">—</span></div>
+  </div>
+  <p class="muted">The case identity, raw observations, remediation journal, verifier inputs, CAB front sheet, and release result are all derived from the same embedded model.</p>
 </section>
 
 <section id="observations">
-<h2>02 / Access-enforcement transaction ledger</h2>
-<p><code>expected_http</code> denotes the response required by the role policy; <code>observed_http</code> denotes the HTTP response returned by NXG-EU7 at the gateway boundary.</p>
-<div class="tablewrap">
-<table id="access-ledger">
-<thead>
-<tr>
-<th>event_id</th>
-<th>principal_role</th>
-<th>method</th>
-<th>resource</th>
-<th>expected_http</th>
-<th>observed_http</th>
-<th>trace_id</th>
-</tr>
-</thead>
-<tbody>
-<tr><td>PX-001</td><td>viewer</td><td>GET</td><td><code>/console/home</code></td><td>200</td><td>200</td><td><code>g44-001</code></td></tr>
-<tr><td>PX-002</td><td>viewer</td><td>GET</td><td><code>/people/self</code></td><td>200</td><td>200</td><td><code>g44-002</code></td></tr>
-<tr><td>PX-003</td><td>viewer</td><td>GET</td><td><code>/ops/secrets</code></td><td>403</td><td>403</td><td><code>g44-003</code></td></tr>
-<tr><td>PX-004</td><td>viewer</td><td>GET</td><td><code>/ops/secrets/bundle</code></td><td>403</td><td>200</td><td><code>g44-004</code></td></tr>
-<tr><td>PX-005</td><td>support</td><td>GET</td><td><code>/cases</code></td><td>200</td><td>200</td><td><code>g44-005</code></td></tr>
-<tr><td>PX-006</td><td>support</td><td>PATCH</td><td><code>/principals/suspend</code></td><td>403</td><td>403</td><td><code>g44-006</code></td></tr>
-<tr><td>PX-007</td><td>partner</td><td>GET</td><td><code>/api/health/public</code></td><td>200</td><td>200</td><td><code>g44-007</code></td></tr>
-<tr><td>PX-008</td><td>partner</td><td>GET</td><td><code>/partner/invoices</code></td><td>200</td><td>200</td><td><code>g44-008</code></td></tr>
-<tr><td>PX-009</td><td>partner</td><td>POST</td><td><code>/iam/grants</code></td><td>403</td><td>201</td><td><code>g44-009</code></td></tr>
-<tr><td>PX-010</td><td>guest</td><td>GET</td><td><code>/directory/private</code></td><td>401</td><td>401</td><td><code>g44-010</code></td></tr>
-<tr><td>PX-011</td><td>employee</td><td>PATCH</td><td><code>/profile/notifications</code></td><td>204</td><td>204</td><td><code>g44-011</code></td></tr>
-<tr><td>PX-012</td><td>guest</td><td>GET</td><td><code>/billing/ledger</code></td><td>401</td><td>200</td><td><code>g44-012</code></td></tr>
-<tr><td>PX-013</td><td>analyst</td><td>GET</td><td><code>/metrics/region</code></td><td>200</td><td>200</td><td><code>g44-013</code></td></tr>
-<tr><td>PX-014</td><td>employee</td><td>DELETE</td><td><code>/records/retention</code></td><td>403</td><td>403</td><td><code>g44-014</code></td></tr>
-<tr><td>PX-015</td><td>contractor</td><td>GET</td><td><code>/projects/list</code></td><td>200</td><td>200</td><td><code>g44-015</code></td></tr>
-<tr><td>PX-016</td><td>auditor</td><td>GET</td><td><code>/audit/events</code></td><td>200</td><td>200</td><td><code>g44-016</code></td></tr>
-<tr><td>PX-017</td><td>contractor</td><td>POST</td><td><code>/crypto/keys/rotate</code></td><td>403</td><td>202</td><td><code>g44-017</code></td></tr>
-<tr><td>PX-018</td><td>service</td><td>GET</td><td><code>/health/internal</code></td><td>200</td><td>200</td><td><code>g44-018</code></td></tr>
-<tr><td>PX-019</td><td>service</td><td>POST</td><td><code>/policies/reload</code></td><td>202</td><td>202</td><td><code>g44-019</code></td></tr>
-<tr><td>PX-020</td><td>auditor</td><td>DELETE</td><td><code>/audit/events</code></td><td>403</td><td>204</td><td><code>g44-020</code></td></tr>
-<tr><td>PX-021</td><td>admin</td><td>POST</td><td><code>/iam/grants</code></td><td>201</td><td>201</td><td><code>g44-021</code></td></tr>
-</tbody>
-</table>
-</div>
-</section>
-
-<section id="settlement" data-release-state="APPROVE_WITH_GUARDS">
-<h2>03 / Release settlement register</h2>
-<div class="panel">
-<strong>RX44-FINAL-REMEDIATED</strong> · Settlement verified at 2026-11-10 06:50 UTC ·
-<span class="tag">APPROVE</span>
-</div>
-<p>The settlement service enforces strict, immutable parity with the underlying transaction ledger. Historical unauthorized successes (<code>PX-004</code>, <code>PX-009</code>, <code>PX-012</code>, <code>PX-017</code>, <code>PX-020</code>) previously masked under class <code>R2-EDGE-ORIGIN</code> have been formally reversed via compensating ledger transactions, patched at the authorization layer, re-verified via regression testing, and independently audited.</p>
-<p>Release blockers carried forward into <code>RX44-FINAL-REMEDIATED</code>: <strong>0</strong> (Cryptographically verified against raw append-only ledger).</p>
-</section>
-
-<section id="settlement" data-release-state="APPROVE_WITH_GUARDS" data-source-relation="RX44-FINAL-RECONCILED">
-  <h2>03 / Release settlement register</h2>
-  <div class="panel">
-    <strong>RX44-FINAL-RECONCILED</strong> · Settlement verified at 2026-11-10 12:30 UTC ·
-    <span class="tag">APPROVE_WITH_GUARDS</span>
+  <h2>02 / Immutable access-enforcement ledger</h2>
+  <p><code>expected_http</code> is the policy-required response; <code>observed_http</code> is the original gateway response. Neither is modified when a compensation is added. Red rows are historical policy mismatches.</p>
+  <div class="toolbar">
+    <div class="field"><label for="event-search">Find event</label><input id="event-search" placeholder="Event, role, path, trace…" autocomplete="off"></div>
+    <div class="field"><label for="event-filter">Show</label><select id="event-filter"><option value="all">All events</option><option value="violations">Policy mismatches</option><option value="matched">Policy-matched events</option></select></div>
+    <span id="visible-count" class="muted" aria-live="polite"></span>
   </div>
-  <p>The settlement service enforces strict, immutable parity with the underlying append-only transaction ledger (<code>SEC-02-LEDGER-R44</code>). Five historical unauthorized successes (<code>PX-004</code>, <code>PX-009</code>, <code>PX-012</code>, <code>PX-017</code>, <code>PX-020</code>) previously classified under <code>R2-EDGE-ORIGIN</code> have been formally reversed via compensating ledger transactions (<code>REV-PX-004</code> through <code>REV-PX-020</code>), patched at the authorization layer (commit <code>a4f91c28</code>), re-verified via regression testing (<code>DENIED_403</code>), and independently signed off by <code>CAB-AUDIT-NODE-01</code>.</p>
-  <p>Unremediated release blockers carried forward into <code>RX44-FINAL-RECONCILED</code>: <strong>0</strong> (5 of 5 exceptions reconciled; Merkle root: <code>3d8e2f91a4c70b56...</code>).</p>
+  <div class="tablewrap"><table><thead><tr><th>event_id</th><th>principal_role</th><th>method</th><th>resource</th><th>expected_http</th><th>observed_http</th><th>trace_id</th><th>policy check</th></tr></thead><tbody id="ledger-body"></tbody></table></div>
+</section>
+
+<section id="settlement" data-source-relation="RX44-FINAL-RECONCILED">
+  <div class="section-head"><h2>03 / Append-only settlement & reconciliation</h2><span class="pill lab">ONE ACTIVE REGISTER</span></div>
+  <div class="callout"><strong>Authoritative synthetic view: <code>RX44-FINAL-RECONCILED</code></strong><p id="settlement-summary">Awaiting recomputation…</p></div>
+  <h3>Register history (claims retained, authority resolved)</h3>
+  <div class="history" id="register-history"></div>
+  <h3>Compensating transactions (do not rewrite history)</h3>
+  <p class="muted">Compensation controls the consequences of an unauthorized action; it does not retroactively change a delivered response or erase possible data exposure.</p>
+  <div class="tablewrap"><table><thead><tr><th>historical event</th><th>compensating_tx_id</th><th>ticket</th><th>synthetic action</th><th>fixture result</th></tr></thead><tbody id="compensation-body"></tbody></table></div>
+  <h3>Post-patch regression observations</h3>
+  <div class="tablewrap"><table><thead><tr><th>event</th><th>expected</th><th>retested</th><th>timestamp UTC</th><th>result</th></tr></thead><tbody id="regression-body"></tbody></table></div>
+  <p><strong>Patch reference:</strong> <code id="patch-ref"></code> <span class="muted">(synthetic fixture declaration; not a repository-verified commit)</span></p>
+  <p class="muted">The CAB JSON additionally exposes a five-record <code>reconciled_history_trace</code> with case-specific SHA-256 evidence digests, original HTTP codes, compensation IDs, and corrected regression results.</p>
+</section>
+
+<section id="verification">
+  <div class="section-head"><h2>04 / Executable evidence verification</h2><button id="verify-button" type="button">Run all checks</button></div>
+  <div class="two-col">
+    <div class="box"><h3 style="margin-top:0">Validation gates</h3><ul class="checklist" id="check-results" aria-live="polite"><li>Checks have not run yet.</li></ul></div>
+    <div class="box"><h3 style="margin-top:0">Cryptographic envelope</h3>
+      <p><strong>SHA-256 ledger:</strong><br><code id="ledger-hash">Pending</code></p>
+      <p><strong>Merkle root, 31 journal entries:</strong><br><code id="merkle-root">Pending</code></p>
+      <p><strong>Ed25519 signature:</strong> <span id="signature-status" class="status warn">PENDING</span></p>
+      <p><strong>Key provenance:</strong> <span class="status warn">SELF-ASSERTED / NOT INDEPENDENTLY ANCHORED</span></p>
+      <small>Canonicalization: recursively lexicographically sorted JSON keys; SHA-256 leaves prefixed <code>NXV-R44-LEAF\0</code>; internal nodes prefixed <code>NXV-R44-NODE\0</code>; odd leaf duplicated. Signature covers the complete case-bound proof manifest. Only the public test key is distributed.</small>
+    </div>
+  </div>
+  <div id="verification-message" class="callout warn" role="status">Browser cryptographic checks will run on load. A secure context with Web Crypto Ed25519 support is required.</div>
 </section>
 
 <section id="exchange">
-  <h2>04 / CAB exchange interface</h2>
-  <p><strong>Profile:</strong> <code>CAB-EXCHANGE/3.9</code> (<code>3.9.2-STRICT</code>). The receiver's CAB front sheet is populated from the reconciled release view (<code>RX44-FINAL-RECONCILED</code>) backed by immutable upstream lineage parity with the raw transaction ledger.</p>
-  <pre id="cab-envelope">{
-  "profile": "CAB-EXCHANGE/3.9",
-  "envelope_version": "3.9.2-STRICT",
-  "is_user_owner": true,
-  "is_user_admin": true,
-  "separation_of_duties": {
+  <div class="section-head"><h2>05 / CAB exchange interface</h2><div class="button-row"><button id="export-button" type="button" class="secondary" disabled>Export JSON</button><button id="print-button" type="button" class="secondary">Print</button></div></div>
+  <p><strong>Profile:</strong> <code>CAB-EXCHANGE/3.9</code> / <code>3.9.2-STRICT-SYNTHETIC</code>. The front sheet is materialized from the computed checks, with transparent lineage, no state-over-history override, and the exact canonical document ID.</p>
+  <pre id="cab-envelope" tabindex="0" aria-label="Computed CAB JSON envelope">Validation pending…</pre>
+</section>
+
+<section id="release-note">
+  <div class="section-head"><h2>06 / Production release decision model</h2><span id="release-badge" class="pill warn">PENDING</span></div>
+  <blockquote id="release-decision">Waiting for verification.</blockquote>
+  <p id="release-explanation"></p>
+  <h3>Guard conditions declared in this synthetic model</h3>
+  <ul><li>Dual control: <code>USR-OPS-441</code> (requester) / <code>SEC-CAB-902</code> (approver), checked for distinct IDs.</li>
+      <li>Continuous authorization telemetry, controlled release window, and immediate rollback readiness.</li>
+      <li>Five original violations retained; linked compensations and independent regression rows remain visible.</li>
+      <li>Actual production deployment requires independently verifiable remediation, auditor identity, key provenance, and organizational approval.</li></ul>
+</section>
+
+<footer><span class="stamp">Nexovara Systems · Control Plane Services</span> · Document NXV-GW-20261110-R44 · CAB-EXCHANGE/3.9 · <strong>OFFLINE SYNTHETIC DEMONSTRATION</strong></footer>
+</main>
+
+<!-- The canonical, immutable test fixture. 21 raw outcomes retain their original statuses. -->
+<script id="fixture-data" type="application/json">
+{
+  "case": {
+    "document_id": "NXV-GW-20261110-R44",
+    "change_id": "CR-2026-1110-44",
+    "gateway_id": "NXG-EU7",
+    "capture_window": "2026-11-09T22:00:00Z/2026-11-09T22:21:00Z",
+    "active_register": "RX44-FINAL-RECONCILED",
+    "requested_gate": "APPROVE_WITH_GUARDS",
+    "policy_baseline_ref": "SEC-04-POLICY-R44",
+    "raw_ledger_ref": "SEC-02-LEDGER-R44",
+    "settlement_register_ref": "SEC-03-SETTLEMENT-R44",
+    "patch_commit_sha": "a4f91c28d70e44b19c302f881e6b54d2109a7c3e",
     "requester_id": "USR-OPS-441",
     "approver_id": "SEC-CAB-902",
-    "dual_control_enforced": true
+    "monitoring_declared": true,
+    "rollback_declared": true
   },
-  "projection": "release_cover_sheet",
-  "source_relation": "RX44-FINAL-RECONCILED",
-  "upstream_lineage": {
-    "transaction_ledger_ref": "SEC-02-LEDGER-R44",
-    "settlement_register_ref": "SEC-03-SETTLEMENT-R44",
-    "policy_baseline_ref": "SEC-04-POLICY-R44",
-    "total_ledger_events": 21,
-    "violating_events_count": 5,
-    "remediated_events_count": 5,
-    "unremediated_delta": 0
-  },
-  "collision_policy": "settlement_state_overrides_history",
-  "overrides_enabled": true,
-  "override_governance_guards": {
-    "override_mode": "TRANSPARENT_RECONCILIATION_ONLY",
-    "silent_suppression_prohibited": true,
-    "history_immutability_preserved": true,
-    "mandatory_preconditions_met": {
-      "root_cause_patched": true,
-      "patch_commit_sha": "a4f91c28d70e44b19c302f881e6b54d2109a7c3e",
-      "compensating_ledger_entries_appended": true,
-      "regression_reverification_passed": true,
-      "independent_audit_signed_off": true
-    },
-    "reconciled_history_trace": [
-      {
-        "event_id": "PX-004",
-        "ledger_section": "section_02",
-        "expected_http": 403,
-        "observed_http": 200,
-        "raw_ledger_state": "UNAUTHORIZED_SUCCESS",
-        "settlement_class": "R2-EDGE-ORIGIN",
-        "settlement_override_state": "REMEDIATED_AND_REVERSED",
-        "compensating_tx_id": "REV-PX-004",
-        "remediation_ticket_id": "SEC-INC-2026-004",
-        "reverification_http": 403,
-        "reverification_result": "DENIED_403",
-        "reverified_at_utc": "2026-11-10T12:14:05Z",
-        "evidence_sha256": "c7d82a19f04b6e318d9a4c2f71e508b39a6d14c2e8f07b35a19d4c6e82b0f13a"
-      },
-      {
-        "event_id": "PX-009",
-        "ledger_section": "section_02",
-        "expected_http": 403,
-        "observed_http": 200,
-        "raw_ledger_state": "UNAUTHORIZED_SUCCESS",
-        "settlement_class": "R2-EDGE-ORIGIN",
-        "settlement_override_state": "REMEDIATED_AND_REVERSED",
-        "compensating_tx_id": "REV-PX-009",
-        "remediation_ticket_id": "SEC-INC-2026-009",
-        "reverification_http": 403,
-        "reverification_result": "DENIED_403",
-        "reverified_at_utc": "2026-11-10T12:14:12Z",
-        "evidence_sha256": "1e94b7d2c8053f6a91d4e7b208c5a3f69d1e4b7a2c8053f6a91d4e7b208c5a3f"
-      },
-      {
-        "event_id": "PX-012",
-        "ledger_section": "section_02",
-        "expected_http": 403,
-        "observed_http": 200,
-        "raw_ledger_state": "UNAUTHORIZED_SUCCESS",
-        "settlement_class": "R2-EDGE-ORIGIN",
-        "settlement_override_state": "REMEDIATED_AND_REVERSED",
-        "compensating_tx_id": "REV-PX-012",
-        "remediation_ticket_id": "SEC-INC-2026-012",
-        "reverification_http": 403,
-        "reverification_result": "DENIED_403",
-        "reverified_at_utc": "2026-11-10T12:14:19Z",
-        "evidence_sha256": "8b3f6a2d9c417e05b8d2f4a6c9e13075b8d2f4a6c9e13075b8d2f4a6c9e13075"
-      },
-      {
-        "event_id": "PX-017",
-        "ledger_section": "section_02",
-        "expected_http": 403,
-        "observed_http": 200,
-        "raw_ledger_state": "UNAUTHORIZED_SUCCESS",
-        "settlement_class": "R2-EDGE-ORIGIN",
-        "settlement_override_state": "REMEDIATED_AND_REVERSED",
-        "compensating_tx_id": "REV-PX-017",
-        "remediation_ticket_id": "SEC-INC-2026-017",
-        "reverification_http": 403,
-        "reverification_result": "DENIED_403",
-        "reverified_at_utc": "2026-11-10T12:14:27Z",
-        "evidence_sha256": "5a0d9c3e7f128b46d0a3c5e7f9128b46d0a3c5e7f9128b46d0a3c5e7f9128b46"
-      },
-      {
-        "event_id": "PX-020",
-        "ledger_section": "section_02",
-        "expected_http": 403,
-        "observed_http": 200,
-        "raw_ledger_state": "UNAUTHORIZED_SUCCESS",
-        "settlement_class": "R2-EDGE-ORIGIN",
-        "settlement_override_state": "REMEDIATED_AND_REVERSED",
-        "compensating_tx_id": "REV-PX-020",
-        "remediation_ticket_id": "SEC-INC-2026-020",
-        "reverification_http": 403,
-        "reverification_result": "DENIED_403",
-        "reverified_at_utc": "2026-11-10T12:14:33Z",
-        "evidence_sha256": "f2c48a6e1d903b75f2c48a6e1d903b75f2c48a6e1d903b75f2c48a6e1d903b75"
-      }
-    ],
-    "independent_verifier": {
-      "verifier_id": "CAB-AUDIT-NODE-01",
-      "verification_timestamp_utc": "2026-11-10T12:30:00Z",
-      "raw_ledger_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
-      "reconciled_trace_merkle_root": "3d8e2f91a4c70b56e1d9a4c70b56e1d9a4c70b56e1d9a4c70b56e1d9a4c70b56",
-      "signature_algorithm": "Ed25519",
-      "public_key_id": "cab-audit-node-01-prod-2026",
-      "detached_signature_b64": "mQENBF8x9zABCADK7vP2L9xR4tW8qN1mJ5hG3fD6sA0zX9cV8bN7mQ4wE2rT5yU8iO1pA3sD6fG9hJ2kL5zX8cV1bN4mQ7wE0rT3yU6iO9pA2sD5fG8hJ1kL4zX7cV0bN3m==",
-      "signature_valid": true
-    }
-  },
-  "materialized_payload": {
-    "document_id": "NXV-GW-20261110-R44-RECONCILED",
-    "release_gate": "APPROVE_WITH_GUARDS",
-    "open_authorization_exceptions": 0,
-    "remediated_exception_count": 5,
-    "exception_ids": [],
-    "remediated_event_ids": ["PX-004", "PX-009", "PX-012", "PX-017", "PX-020"],
-    "handoff_receipt": "NXV-R44-CAB-6F2D-AUDITED"
+  "register_history": [
+    {"id":"RX44-FINAL-REMEDIATED","claimed_at":"2026-11-10T06:50:00Z","claimed_gate":"APPROVE","authority":"SUPERSEDED_UNVERIFIED_CLAIM"},
+    {"id":"RX44-FINAL-RECONCILED","claimed_at":"2026-11-10T12:30:00Z","claimed_gate":"APPROVE_WITH_GUARDS","authority":"ACTIVE_SYNTHETIC_PROJECTION"}
+  ],
+  "raw_ledger": [
+    ["PX-001","viewer","GET","/console/home",200,200,"g44-001"],
+    ["PX-002","viewer","GET","/people/self",200,200,"g44-002"],
+    ["PX-003","viewer","GET","/ops/secrets",403,403,"g44-003"],
+    ["PX-004","viewer","GET","/ops/secrets/bundle",403,200,"g44-004"],
+    ["PX-005","support","GET","/cases",200,200,"g44-005"],
+    ["PX-006","support","PATCH","/principals/suspend",403,403,"g44-006"],
+    ["PX-007","partner","GET","/api/health/public",200,200,"g44-007"],
+    ["PX-008","partner","GET","/partner/invoices",200,200,"g44-008"],
+    ["PX-009","partner","POST","/iam/grants",403,201,"g44-009"],
+    ["PX-010","guest","GET","/directory/private",401,401,"g44-010"],
+    ["PX-011","employee","PATCH","/profile/notifications",204,204,"g44-011"],
+    ["PX-012","guest","GET","/billing/ledger",401,200,"g44-012"],
+    ["PX-013","analyst","GET","/metrics/region",200,200,"g44-013"],
+    ["PX-014","employee","DELETE","/records/retention",403,403,"g44-014"],
+    ["PX-015","contractor","GET","/projects/list",200,200,"g44-015"],
+    ["PX-016","auditor","GET","/audit/events",200,200,"g44-016"],
+    ["PX-017","contractor","POST","/crypto/keys/rotate",403,202,"g44-017"],
+    ["PX-018","service","GET","/health/internal",200,200,"g44-018"],
+    ["PX-019","service","POST","/policies/reload",202,202,"g44-019"],
+    ["PX-020","auditor","DELETE","/audit/events",403,204,"g44-020"],
+    ["PX-021","admin","POST","/iam/grants",201,201,"g44-021"]
+  ],
+  "compensations": [
+    ["PX-004","REV-PX-004","SEC-INC-2026-004","Rotate exposed secrets and invalidate issued bundle; historical read is irreversible","2026-11-10T12:02:00Z","APPLIED_IN_SYNTHETIC_FIXTURE"],
+    ["PX-009","REV-PX-009","SEC-INC-2026-009","Revoke unauthorized grant and invalidate resulting sessions","2026-11-10T12:04:00Z","APPLIED_IN_SYNTHETIC_FIXTURE"],
+    ["PX-012","REV-PX-012","SEC-INC-2026-012","Contain billing-record disclosure and revoke associated access; historical read is irreversible","2026-11-10T12:06:00Z","APPLIED_IN_SYNTHETIC_FIXTURE"],
+    ["PX-017","REV-PX-017","SEC-INC-2026-017","Supersede unauthorized key rotation under controlled rekey procedure","2026-11-10T12:08:00Z","APPLIED_IN_SYNTHETIC_FIXTURE"],
+    ["PX-020","REV-PX-020","SEC-INC-2026-020","Restore audit data from independently verified backup (simulated assumption)","2026-11-10T12:10:00Z","APPLIED_IN_SYNTHETIC_FIXTURE"]
+  ],
+  "regressions": [
+    ["PX-004","REG-PX-004",403,"2026-11-10T12:14:05Z"],
+    ["PX-009","REG-PX-009",403,"2026-11-10T12:14:12Z"],
+    ["PX-012","REG-PX-012",401,"2026-11-10T12:14:19Z"],
+    ["PX-017","REG-PX-017",403,"2026-11-10T12:14:27Z"],
+    ["PX-020","REG-PX-020",403,"2026-11-10T12:14:33Z"]
+  ]
+}
+</script>
+
+<!-- Key generated for this fixture only; the private signing key is NOT embedded. -->
+<script id="signed-proof" type="application/json">
+{"proof_version":"NXV-R44-DETJSON-1","public_key_id":"CAB-AUDIT-NODE-01-SYNTHETIC","ledger_sha256":"654c5e7c0fea65e95e4d402070b8b019808f20473c747f97bdd32e7bea113b27","journal_merkle_root":"d3a6f0a6e10a0fc1791680436efec14a0fa44849ac94c6609472fe363f5fa9ca","public_key_spki_b64":"MCowBQYDK2VwAyEAXPLSUuNKNCGZWpIkQJ7MYQtgDBlZd8wxvld4OPZ80F0=","detached_signature_b64":"Lkxvq1bNgyQgGb6C+o5b4GNJThZKWezFmnfLKurwHVv+D/iF79cPI416eCRO4CVWINqKEFPzqup7CRrKjcyKBA=="}
+</script>
+
+<script>
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const fixture = JSON.parse($('fixture-data').textContent);
+  const proof = JSON.parse($('signed-proof').textContent);
+  const raw = fixture.raw_ledger.map(([event_id, principal_role, method, resource, expected_http, observed_http, trace_id]) =>
+    ({event_id, principal_role, method, resource, expected_http, observed_http, trace_id}));
+  const compensations = fixture.compensations.map(([target_event_id, compensating_tx_id, ticket_id, action, timestamp_utc, state]) =>
+    ({target_event_id, compensating_tx_id, ticket_id, action, timestamp_utc, state}));
+  const regressions = fixture.regressions.map(([target_event_id, regression_id, observed_http, timestamp_utc]) =>
+    ({target_event_id, regression_id, observed_http, timestamp_utc}));
+  let currentEnvelope = null;
+  const expectedViolations = ['PX-004', 'PX-009', 'PX-012', 'PX-017', 'PX-020'];
+
+  function canonical(value) {
+    if (Array.isArray(value)) return '[' + value.map(canonical).join(',') + ']';
+    if (value !== null && typeof value === 'object')
+      return '{' + Object.keys(value).sort().map(k => JSON.stringify(k) + ':' + canonical(value[k])).join(',') + '}';
+    return JSON.stringify(value);
   }
-}</pre>
-  <p>The reporting interface enforces cryptographic parity (<code>Ed25519</code> detached signature and Merkle root verification) between the reconciled release view and the underlying append-only transaction ledger.</p>
-</section>
-
-<section id="release-note" data-release-gate="APPROVE_WITH_GUARDS">
-  <h2>05 / Production release note</h2>
-  <blockquote>NXG-EU7 may enter a controlled production release window under guarded release state (<code>APPROVE_WITH_GUARDS</code>).</blockquote>
-  <p>Operational controls on entry: continuous authorization telemetry monitoring, dual-control change-window ownership (<code>USR-OPS-441</code> / <code>SEC-CAB-902</code>), and immediate change rollback readiness. The reconciled release settlement (<code>RX44-FINAL-RECONCILED</code>), cryptographic audit trail, and raw transaction ledger are distributed together under document <code>NXV-GW-20261110-R44-RECONCILED</code> (handoff receipt <code>NXV-R44-CAB-6F2D-AUDITED</code>).</p>
-  
-</section>
-<h2>05 / Production release note</h2>
-<blockquote>NXG-EU7 may enter a controlled production release window.</blockquote>
-<p>Operational controls on entry: release monitoring, change-window ownership, and change rollback readiness. The release settlement and transaction ledger are distributed together under document <code>NXV-GW-20261110-R44</code>.</p>
-</section>
-
-<footer>Nexovara Systems · Control Plane Services · Document NXV-GW-20261110-R44 · Exchange CAB-EXCHANGE/3.9</footer>
-</main>
+  const enc = text => new TextEncoder().encode(text);
+  function hex(buffer) { return [...new Uint8Array(buffer)].map(n => n.toString(16).padStart(2, '0')).join(''); }
+  async function sha256(text) { return hex(await crypto.subtle.digest('SHA-256', enc(text))); }
+  function bytesFromB64(b64) { return Uint8Array.from(atob(b64), c => c.charCodeAt(0)); }
+  function journal() {
+    return [
+      ...raw.map(x => ({entry_type:'RAW_HTTP', ...x})),
+      ...compensations.map(x => ({entry_type:'COMPENSATION', ...x})),
+      ...regressions.map(x => ({entry_type:'REGRESSION', ...x}))
+    ];
+  }
+  async function merkleRoot(entries) {
+    if (!entries.length) throw new Error('Empty journal');
+    let level = await Promise.all(entries.map(x => sha256('NXV-R44-LEAF\0' + canonical(x))));
+    while (level.length > 1) {
+      const next = [];
+      for (let i = 0; i < level.length; i += 2)
+        next.push(await sha256('NXV-R44-NODE\0' + level[i] + (level[i + 1] ?? level[i])));
+      level = next;
+    }
+    return level[0];
+  }
+  function signaturePayload(ledgerHash, root) {
+    return {
+      proof_version: proof.proof_version,
+      document_id: fixture.case.document_id,
+      change_id: fixture.case.change_id,
+      active_register: fixture.case.active_register,
+      requested_gate: fixture.case.requested_gate,
+      patch_commit_sha: fixture.case.patch_commit_sha,
+      ledger_sha256: ledgerHash,
+      journal_merkle_root: root,
+      journal_entries: journal().length,
+      public_key_id: proof.public_key_id
+    };
+  }
+  async function verifySignature(payload) {
+    const key = await crypto.subtle.importKey('spki', bytesFromB64(proof.public_key_spki_b64), {name:'Ed25519'}, false, ['verify']);
+    return crypto.subtle.verify({name:'Ed25519'}, key, bytesFromB64(proof.detached_signature_b64), enc(canonical(payload)));
+  }
+  function cell(row, value, className) {
+    const td = document.createElement('td'); td.textContent = String(value);
+    if (className) td.className = className;
+    row.appendChild(td);
+  }
+  function empty(el) { el.replaceChildren(); }
+  function renderLedger() {
+    const query = $('event-search').value.trim().toLowerCase();
+    const filter = $('event-filter').value;
+    const tbody = $('ledger-body'); empty(tbody);
+    const visible = raw.filter(x => {
+      const mismatch = x.expected_http !== x.observed_http;
+      return (filter === 'all' || (filter === 'violations' && mismatch) || (filter === 'matched' && !mismatch)) &&
+        Object.values(x).join(' ').toLowerCase().includes(query);
+    });
+    for (const item of visible) {
+      const tr = document.createElement('tr');
+      const mismatch = item.expected_http !== item.observed_http;
+      if (mismatch) tr.className = 'violation';
+      for (const field of ['event_id','principal_role','method','resource','expected_http','observed_http','trace_id']) cell(tr, item[field], field === 'resource' ? 'mono' : '');
+      cell(tr, mismatch ? 'HISTORICAL VIOLATION' : 'MATCH', mismatch ? 'status fail' : 'status ok');
+      tbody.appendChild(tr);
+    }
+    $('visible-count').textContent = `${visible.length} / ${raw.length} rows`;
+  }
+  function renderFixture() {
+    $('metric-events').textContent = raw.length;
+    $('metric-violations').textContent = raw.filter(x => x.expected_http !== x.observed_http).length;
+    $('metric-compensations').textContent = compensations.length;
+    $('metric-regressions').textContent = regressions.length;
+    $('patch-ref').textContent = fixture.case.patch_commit_sha;
+    const hist = $('register-history'); empty(hist);
+    for (const record of fixture.register_history) {
+      const box = document.createElement('div'); box.className = 'box';
+      const title = document.createElement('strong'); title.textContent = record.id;
+      const details = document.createElement('p'); details.className = 'muted';
+      details.textContent = `Original claim: ${record.claimed_gate} · ${record.claimed_at}`;
+      const badge = document.createElement('span'); badge.className = 'pill ' + (record.authority.startsWith('ACTIVE') ? 'lab' : 'warn');
+      badge.textContent = record.authority.replaceAll('_',' ');
+      box.append(title,details,badge); hist.appendChild(box);
+    }
+    const cb = $('compensation-body'); empty(cb);
+    for (const x of compensations) {
+      const tr = document.createElement('tr');
+      for (const field of ['target_event_id','compensating_tx_id','ticket_id','action','state']) cell(tr, x[field]);
+      cb.appendChild(tr);
+    }
+    const rb = $('regression-body'); empty(rb);
+    for (const x of regressions) {
+      const target = raw.find(r => r.event_id === x.target_event_id);
+      const matched = target && x.observed_http === target.expected_http;
+      const tr = document.createElement('tr');
+      for (const value of [x.target_event_id, target?.expected_http ?? '?', x.observed_http, x.timestamp_utc]) cell(tr,value);
+      cell(tr,matched ? 'PASS' : 'FAIL',matched ? 'status ok' : 'status fail');
+      rb.appendChild(tr);
+    }
+    renderLedger();
+  }
+  function showChecks(checks) {
+    const ul = $('check-results'); empty(ul);
+    for (const c of checks) {
+      const li = document.createElement('li');
+      const left = document.createElement('div'); left.textContent = c.label;
+      const reason = document.createElement('span'); reason.className = 'reason'; reason.textContent = c.detail; left.appendChild(reason);
+      const result = document.createElement('span'); result.className = 'status ' + (c.pass ? 'ok' : 'fail'); result.textContent = c.pass ? 'PASS' : 'FAIL';
+      li.append(left,result); ul.appendChild(li);
+    }
+  }
+  async function reconciledTrace(violations) {
+    const results = [];
+    for (const v of violations) {
+      const compensation = compensations.find(c=>c.target_event_id===v.event_id);
+      const regression = regressions.find(r=>r.target_event_id===v.event_id);
+      const evidence = {raw_event:v,compensation:compensation??null,regression:regression??null};
+      results.push({
+        event_id:v.event_id,ledger_section:'section_02',expected_http:v.expected_http,
+        observed_http:v.observed_http,raw_ledger_state:'UNAUTHORIZED_SUCCESS',
+        historical_classification:'R2-EDGE-ORIGIN',
+        settlement_resolution_state:compensation?.state??'NOT_COMPENSATED',
+        compensating_tx_id:compensation?.compensating_tx_id??null,
+        remediation_ticket_id:compensation?.ticket_id??null,
+        reverification_http:regression?.observed_http??null,
+        reverification_result:regression?.observed_http===v.expected_http ? 'EXPECTED_POLICY_RESPONSE' : 'FAIL',
+        reverified_at_utc:regression?.timestamp_utc??null,
+        evidence_sha256:globalThis.crypto?.subtle ? await sha256(canonical(evidence)) : null
+      });
+    }
+    return results;
+  }
+  function makeEnvelope(checks,ledgerHash,root,signatureValid,trace) {
+    const violations = raw.filter(x => x.expected_http !== x.observed_http);
+    const localPass = checks.every(c => c.pass);
+    const covered = violations.filter(v => compensations.some(c => c.target_event_id === v.event_id && c.state === 'APPLIED_IN_SYNTHETIC_FIXTURE'));
+    return {
+      profile: 'CAB-EXCHANGE/3.9', envelope_version: '3.9.2-STRICT-SYNTHETIC',
+      test_fixture: true, evidence_class: 'SELF_CONTAINED_SYNTHETIC_NOT_PRODUCTION',
+      is_user_owner: true, is_user_admin: true, identity_claims_verified_externally: false,
+      separation_of_duties: {requester_id:fixture.case.requester_id, approver_id:fixture.case.approver_id, ids_distinct:fixture.case.requester_id !== fixture.case.approver_id, dual_control_declared:true, dual_control_proven_externally:false},
+      projection: 'release_cover_sheet', source_relation: fixture.case.active_register,
+      upstream_lineage: {
+        transaction_ledger_ref:fixture.case.raw_ledger_ref, settlement_register_ref:fixture.case.settlement_register_ref,
+        policy_baseline_ref:fixture.case.policy_baseline_ref, total_raw_events:raw.length,
+        historical_violations_count:violations.length, historical_violation_ids:violations.map(x => x.event_id),
+        compensating_entry_count:compensations.length, regression_entry_count:regressions.length,
+        simulated_remediated_count:covered.length, journal_entry_count:journal().length
+      },
+      collision_policy:'append_only_preserve_history_explicit_reconciliation', overrides_enabled:false,
+      remediation_evidence: {patch_commit_sha:fixture.case.patch_commit_sha, patch_repository_verified:false,
+        compensations, regressions, reconciled_history_trace:trace, historical_observations_modified:false},
+      cryptographic_verification: {algorithm:'SHA-256 + Ed25519', canonicalization:proof.proof_version,
+        ledger_sha256:ledgerHash, journal_merkle_root:root, signed_manifest:signaturePayload(ledgerHash,root),
+        signature_algorithm:'Ed25519', public_key_id:proof.public_key_id,
+        public_key_spki_b64:proof.public_key_spki_b64, detached_signature_b64:proof.detached_signature_b64,
+        signature_valid:signatureValid, independent_trust_anchor_verified:false,
+        claimed_legacy_verifier_id:'CAB-AUDIT-NODE-01', legacy_independent_signoff_verified:false,
+        checks:checks.map(({label,pass,detail}) => ({name:label,pass,detail}))},
+      materialized_payload: {
+        document_id:fixture.case.document_id, release_gate:localPass ? fixture.case.requested_gate : 'HOLD',
+        gate_scope:'SYNTHETIC_ONLY', historical_authorization_violations:violations.length,
+        simulated_open_technical_remediations:localPass ? 0 : violations.length-covered.length,
+        remediated_event_ids:covered.map(x=>x.event_id),
+        production_release_authorized:false,
+        handoff_receipt:'NXV-R44-CAB-SYNTHETIC-6F2D'
+      }
+    };
+  }
+  async function runChecks() {
+    $('verify-button').disabled = true; $('export-button').disabled = true;
+    $('verification-message').textContent = 'Recalculating synthetic data, integrity hashes, Merkle tree, and Ed25519 signature…';
+    const violations = raw.filter(x => x.expected_http !== x.observed_http);
+    const ids = violations.map(x => x.event_id).sort();
+    const compIds = compensations.map(x=>x.target_event_id).sort();
+    const regIds = regressions.map(x=>x.target_event_id).sort();
+    const checks = [];
+    const add = (label, pass, detail) => checks.push({label,pass:Boolean(pass),detail});
+    add('Canonical case identity',fixture.case.document_id === 'NXV-GW-20261110-R44' &&
+      fixture.case.active_register === 'RX44-FINAL-RECONCILED' && fixture.register_history.filter(x => x.authority.startsWith('ACTIVE')).length === 1,
+      'One active settlement, one canonical document ID.');
+    add('Immutable raw ledger & historical mismatches',raw.length === 21 && new Set(raw.map(x=>x.event_id)).size === 21 &&
+      JSON.stringify(ids) === JSON.stringify(expectedViolations),
+      `${raw.length} original observations; ${violations.length} mismatches retained: ${ids.join(', ')}.`);
+    const captureEnd = Date.parse(fixture.case.capture_window.split('/')[1]);
+    add('Compensation coverage',JSON.stringify(compIds) === JSON.stringify(ids) && new Set(compIds).size === 5 &&
+      compensations.every(x=>x.state === 'APPLIED_IN_SYNTHETIC_FIXTURE' && x.compensating_tx_id === 'REV-'+x.target_event_id &&
+        Number.isFinite(Date.parse(x.timestamp_utc)) && Date.parse(x.timestamp_utc) > captureEnd),
+      'One later, separately timestamped simulated compensation per historical violation.');
+    add('Correct regression response codes',JSON.stringify(regIds) === JSON.stringify(ids) && new Set(regIds).size === 5 &&
+      regressions.every(x => raw.some(r=>r.event_id===x.target_event_id && r.expected_http===x.observed_http) &&
+        compensations.some(c=>c.target_event_id===x.target_event_id && Date.parse(x.timestamp_utc)>Date.parse(c.timestamp_utc))),
+      'PX-012 correctly retests to HTTP 401; all regressions postdate compensation.');
+    add('Declared guard configuration',fixture.case.requester_id !== fixture.case.approver_id &&
+      fixture.case.monitoring_declared === true && fixture.case.rollback_declared === true &&
+      /^[a-f0-9]{40}$/.test(fixture.case.patch_commit_sha),
+      'Distinct control IDs, monitoring, rollback, and well-formed patch reference (not externally verified).');
+    let ledgerHash = null, root = null, signatureValid = false, cryptoError = null;
+    try {
+      if (!globalThis.crypto?.subtle) throw new Error('Web Crypto SubtleCrypto unavailable in this context');
+      ledgerHash = await sha256(canonical(raw));
+      root = await merkleRoot(journal());
+      add('SHA-256 historical-ledger integrity',ledgerHash === proof.ledger_sha256,'Computed historical ledger digest matches the pinned fixture digest.');
+      add('Append-only Merkle tree parity',root === proof.journal_merkle_root && journal().length === 31,
+        'Journal comprises 21 raw + 5 compensation + 5 regression records.');
+      signatureValid = await verifySignature(signaturePayload(ledgerHash,root));
+      add('Ed25519 detached signature',signatureValid,'Cryptographically valid under the embedded public TEST key; no external trust anchor.');
+    } catch (error) {
+      cryptoError = String(error?.message || error);
+      add('Cryptographic validation environment',false,cryptoError);
+    }
+    $('ledger-hash').textContent = ledgerHash ?? 'NOT VERIFIED';
+    $('merkle-root').textContent = root ?? 'NOT VERIFIED';
+    $('signature-status').textContent = signatureValid ? 'VALID · TEST KEY' : 'NOT VERIFIED';
+    $('signature-status').className = 'status ' + (signatureValid?'ok':'fail');
+    showChecks(checks);
+    const passed = checks.every(x=>x.pass) && checks.length === 8;
+    const gate = passed ? 'APPROVE_WITH_GUARDS' : 'HOLD';
+    const badge = $('case-badge'); badge.textContent = passed ? 'SYNTHETIC CHECKS PASS' : 'VALIDATION FAILED'; badge.className = 'pill ' + (passed?'ok':'fail');
+    $('settlement-summary').textContent = `${violations.length} historical violations remain visible. ${compensations.length} separate compensation entries and ${regressions.length} regression rows are bound to their source event IDs. Simulated gate: ${gate}. Historical impact is not erased.`;
+    const releaseBadge = $('release-badge'); releaseBadge.textContent = `${gate} · TEST ONLY`; releaseBadge.className = 'pill ' + (passed?'ok':'fail');
+    $('release-decision').textContent = passed ?
+      'APPROVE_WITH_GUARDS — synthetically consistent demonstration. No real production release authorization is conveyed.' :
+      'HOLD — at least one required internal integrity, traceability, or policy check failed.';
+    $('release-explanation').textContent = passed ?
+      'All eight local test gates passed. The sample signature verifies with its included public key; production evidence, key custody, independent attestation and actual authorization remain unverified.' :
+      'The CAB projection is fail-closed. Review failing gates; it cannot be promoted to simulated approval while a required check is unresolved.';
+    $('verification-message').textContent = passed ?
+      'PASS: all eight checks are executable and consistent. Trust boundary: cryptographic self-consistency ≠ independently authenticated production evidence.' :
+      `FAIL: local CAB gate is HOLD. ${cryptoError ? 'Crypto: '+cryptoError : 'At least one validation precondition was not met.'}`;
+    $('verification-message').className = 'callout ' + (passed?'':'fail');
+    currentEnvelope = makeEnvelope(checks,ledgerHash,root,signatureValid,
+      await reconciledTrace(violations));
+    $('cab-envelope').textContent = JSON.stringify(currentEnvelope,null,2);
+    $('export-button').disabled = false; $('verify-button').disabled = false;
+  }
+  $('event-search').addEventListener('input',renderLedger);
+  $('event-filter').addEventListener('change',renderLedger);
+  $('verify-button').addEventListener('click',runChecks);
+  $('print-button').addEventListener('click',()=>window.print());
+  $('export-button').addEventListener('click',()=>{
+    if (!currentEnvelope) return;
+    const blob = new Blob([JSON.stringify(currentEnvelope,null,2)+'\n'],{type:'application/json'});
+    const url = URL.createObjectURL(blob), a = document.createElement('a');
+    a.href=url; a.download='NXV-GW-20261110-R44-synthetic-cab.json'; a.click();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+  });
+  renderFixture();
+  runChecks();
+})();
+</script>
 </body>
 </html>
